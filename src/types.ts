@@ -1,3 +1,3 @@
-export interface NavProps {
-  content?: string;
+export interface CardContainerProps {
+  className?: string;
 }

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Root } from './components/Root';
 
 const App: React.FC = () => {
-  return <div className="App p-4">Hello world</div>;
+  return <Root />;
 };
 
 export default App;

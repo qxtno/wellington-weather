@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { CardContainerProps } from '../types';
+import { Link } from 'react-router-dom';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
@@ -18,6 +19,9 @@ const AddLocationCard: React.FC = () => {
   return (
     <CardContainer>
       <div>hej</div>
+      <Link to="/add-location">
+        <button>dodaj</button>
+      </Link>
     </CardContainer>
   );
 };

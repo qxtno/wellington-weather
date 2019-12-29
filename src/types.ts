@@ -7,7 +7,13 @@ export interface CardContainerProps {
 export interface SearchItem {
   id: number;
   name: string;
-  sys: { country: string };
+  sys: {
+    country: string;
+  };
+  coord: {
+    lat: number;
+    lon: number;
+  };
 }
 
 export interface FindResponseJson {

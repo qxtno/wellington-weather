@@ -2,24 +2,25 @@ import { useState } from 'react';
 import { API_KEY, SearchItem, FindResponseJson } from '../types';
 
 export function useAddLocationState() {
-  const [search, setSearch] = useState('lublin');
+  const [search, setSearch] = useState('');
   const [searchList, setSearchList] = useState<SearchItem[]>([]);
   const [error, setError] = useState('');
 
   async function onSearch() {
-    console.warn('searching for...', search);
+    // TODO prevent race condition
+    console.log('searching for...', search);
     let list: SearchItem[] = [];
     let hasError = false;
     try {
-      //https://openweathermap.org/data/2.5/find?callback=jQuery19107896401557608224_1577543304238&q=rome&type=like&sort=population&cnt=30&appid=b6907d289e10d714a6e88b30761fae22&_=1577543304240
       const dataURL =
         'https://api.openweathermap.org/data/2.5/find?q=' +
         search +
+        '&sort=population' +
         '&APPID=' +
         API_KEY;
       const response = await fetch(dataURL);
       const json: FindResponseJson = await response.json();
-      console.log('json', json);
+      console.warn('json', json);
       if (json.cod === '200') {
         list = json.list;
       } else if (json.cod === '400') {
@@ -30,9 +31,12 @@ export function useAddLocationState() {
     }
     if (hasError) {
       setError(`Unable to find city: '${search}'`);
-      setSearch('');
     } else {
-      setError('');
+      if (list.length === 0) {
+        setError('No results');
+      } else {
+        setError('');
+      }
     }
     setSearchList(list);
   }

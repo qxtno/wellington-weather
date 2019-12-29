@@ -32,7 +32,17 @@ export const AddLocation: React.FC = () => {
 
         {searchList.map(item => {
           return (
-            <div key={item.id}> {`${item.name}, ${item.sys.country}`} </div>
+            <div key={item.id}>
+              {`${item.name}, ${item.sys.country}`}
+              <a
+                className="hover:underline text-blue-600"
+                href={`https://www.google.com/maps/search/${item.coord.lat},${item.coord.lon}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                see location [{`${item.coord.lat},${item.coord.lon}`}]
+              </a>
+            </div>
           );
         })}
       </div>

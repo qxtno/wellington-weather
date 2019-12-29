@@ -28,7 +28,7 @@ const AddLocationCard: React.FC = () => {
 
 export const WeatherCards: React.FC = () => {
   return (
-    <div className="flex flex-wrap justify-center my-2">
+    <div className="flex flex-wrap justify-center">
       <AddLocationCard />
       <AddLocationCard />
       <AddLocationCard />

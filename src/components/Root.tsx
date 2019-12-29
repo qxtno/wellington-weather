@@ -11,8 +11,8 @@ export const Root: React.FC = () => {
         className="h-full w-full"
         style={{ display: 'grid', gridTemplateRows: 'auto 80px' }}
       >
-        <main className="overflow-auto">
-          <div className="pb-2">
+        <main className="overflow-auto w-full max-w-4xl mx-auto">
+          <div className="p-2 pb-4">
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>

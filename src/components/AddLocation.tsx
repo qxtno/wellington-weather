@@ -13,20 +13,22 @@ export const AddLocation: React.FC = () => {
   function render() {
     return (
       <div>
-        <input
-          className="border rounded p-1"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          onKeyDown={e => {
-            e.key === 'Enter' ? onSearch() : void 0;
-          }}
-        />
-        <button
-          className="rounded bg-gray-200 p-1 hover:bg-gray-300"
-          onClick={onSearch}
-        >
-          search
-        </button>
+        <div className="flex max-w-sm mx-auto">
+          <input
+            className="border flex-1 px-2 rounded"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            onKeyDown={e => {
+              e.key === 'Enter' ? onSearch() : void 0;
+            }}
+          />
+          <button
+            className="rounded bg-gray-200 ml-2 px-4 p-1 hover:bg-gray-300"
+            onClick={onSearch}
+          >
+            Search
+          </button>
+        </div>
 
         {error && <div>{error}</div>}
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { API_KEY, SearchItem, FindResponseJson } from '../types';
 
 export function useAddLocationState() {
@@ -6,7 +6,7 @@ export function useAddLocationState() {
   const [searchList, setSearchList] = useState<SearchItem[]>([]);
   const [error, setError] = useState('');
 
-  async function onSearch() {
+  const onSearch = useCallback(async () => {
     // TODO prevent race condition
     console.log('searching for...', search);
     let list: SearchItem[] = [];
@@ -39,6 +39,7 @@ export function useAddLocationState() {
       }
     }
     setSearchList(list);
-  }
+  }, [search]);
+
   return { search, setSearch, onSearch, error, searchList };
 }

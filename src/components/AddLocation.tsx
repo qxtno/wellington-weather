@@ -43,7 +43,7 @@ export const AddLocation: React.FC = () => {
     return (
       <>
         {searchList.map((item, index) => {
-          const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-green-200';
+          const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100';
           const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
           return (
             <div key={item.id} className={itemClass}>
@@ -55,10 +55,17 @@ export const AddLocation: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  see location [{`${item.coord.lat},${item.coord.lon}`}]
+                  [{`${item.coord.lat},${item.coord.lon}`}]
                 </a>
               </div>
-              <div>link</div>
+              <div>
+                <button
+                  className="bg-green-500 hover:bg-green-600 text-white px-2 rounded"
+                  title="Add location"
+                >
+                  +
+                </button>
+              </div>
             </div>
           );
         })}

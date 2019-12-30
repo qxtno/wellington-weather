@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAddLocationState } from '../hooks/useAddLocationState';
+import classNames from 'classnames';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -10,43 +11,69 @@ export const AddLocation: React.FC = () => {
     searchList
   } = useAddLocationState();
 
-  function render() {
+  function searchSection() {
     return (
-      <div>
-        <div className="flex max-w-sm mx-auto">
-          <input
-            className="border flex-1 px-2 rounded"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            onKeyDown={e => {
-              e.key === 'Enter' ? onSearch() : void 0;
-            }}
-          />
-          <button
-            className="rounded bg-gray-200 ml-2 px-4 p-1 hover:bg-gray-300"
-            onClick={onSearch}
-          >
-            Search
-          </button>
-        </div>
+      <div className="flex max-w-sm mx-auto">
+        <input
+          className="border flex-1 px-2 rounded min-w-0"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          onKeyDown={e => {
+            e.key === 'Enter' ? onSearch() : void 0;
+          }}
+        />
+        <button
+          className="rounded bg-gray-200 ml-2 px-4 p-1 hover:bg-gray-300"
+          onClick={onSearch}
+        >
+          Search
+        </button>
+      </div>
+    );
+  }
 
-        {error && <div>{error}</div>}
+  function errorSection() {
+    if (error) {
+      return <div className="flex justify-center">{error}</div>;
+    }
+    return null;
+  }
 
-        {searchList.map(item => {
+  function searchListSection() {
+    return (
+      <>
+        {searchList.map((item, index) => {
+          const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-green-200';
+          const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
           return (
-            <div key={item.id}>
-              {`${item.name}, ${item.sys.country}`}
-              <a
-                className="hover:underline text-blue-600"
-                href={`https://www.google.com/maps/search/${item.coord.lat},${item.coord.lon}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                see location [{`${item.coord.lat},${item.coord.lon}`}]
-              </a>
+            <div key={item.id} className={itemClass}>
+              <div>{`${item.name}, ${item.sys.country}`}</div>
+              <div className="px-2 flex-1">
+                <a
+                  className="hover:underline text-blue-600"
+                  href={`https://www.google.com/maps/search/${item.coord.lat},${item.coord.lon}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  see location [{`${item.coord.lat},${item.coord.lon}`}]
+                </a>
+              </div>
+              <div>link</div>
             </div>
           );
         })}
+      </>
+    );
+  }
+
+  function render() {
+    return (
+      <div>
+        {searchSection()}
+        <div className="pt-4">
+          {errorSection()}
+          {searchListSection()}
+        </div>
       </div>
     );
   }

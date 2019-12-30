@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
+import { stateContext } from '../store/store';
+import { INCREMENT } from '../store/actions';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -10,6 +12,9 @@ export const AddLocation: React.FC = () => {
     error,
     searchList
   } = useAddLocationState();
+
+  const [state, dispatch] = useContext(stateContext);
+  const { counter } = state;
 
   function searchSection() {
     return (
@@ -59,7 +64,11 @@ export const AddLocation: React.FC = () => {
                 </a>
               </div>
               <div>
+                {counter}
                 <button
+                  onClick={() => {
+                    dispatch({ type: INCREMENT });
+                  }}
                   className="bg-green-500 hover:bg-green-600 text-white px-2 rounded"
                   title="Add location"
                 >

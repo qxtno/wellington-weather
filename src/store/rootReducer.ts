@@ -1,31 +1,21 @@
-import { State, StateAction } from '../types';
-import { INCREMENT } from './actions';
+import { State, StateAction, AddLocationActionPayload } from '../types';
+import { ADD_LOCATION } from './actions';
 
 export const initialState: State = {
-  counter: 5
+  saveLocationIds: []
 };
 
 export const rootReducer = (state: State, action: StateAction) => {
   switch (action.type) {
-    case 'LOGIN':
-      return {
-        ...state
-      };
-    case 'LOGIN_ERROR':
-      return {
-        ...state
-      };
-    case 'LOGOUT':
-      return {
-        ...state
-      };
-
-    case INCREMENT:
+    case ADD_LOCATION: {
       return {
         ...state,
-        counter: state.counter ? state.counter + 1 : 0
+        saveLocationIds: [
+          ...state.saveLocationIds,
+          (action.payload as AddLocationActionPayload).locationId
+        ]
       };
-
+    }
     default:
       return state;
   }

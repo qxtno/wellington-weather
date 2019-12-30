@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
 import { stateContext } from '../store/store';
-import { INCREMENT } from '../store/actions';
+import { AddLocationAction } from '../store/actions';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -14,7 +14,7 @@ export const AddLocation: React.FC = () => {
   } = useAddLocationState();
 
   const [state, dispatch] = useContext(stateContext);
-  const { counter } = state;
+  const { saveLocationIds } = state;
 
   function searchSection() {
     return (
@@ -50,6 +50,10 @@ export const AddLocation: React.FC = () => {
         {searchList.map((item, index) => {
           const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100';
           const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
+
+          const alreadyAdded =
+            saveLocationIds.find(p => p === item.id) ?? false;
+
           return (
             <div key={item.id} className={itemClass}>
               <div>{`${item.name}, ${item.sys.country}`}</div>
@@ -64,16 +68,22 @@ export const AddLocation: React.FC = () => {
                 </a>
               </div>
               <div>
-                {counter}
-                <button
-                  onClick={() => {
-                    dispatch({ type: INCREMENT });
-                  }}
-                  className="bg-green-500 hover:bg-green-600 text-white px-2 rounded"
-                  title="Add location"
-                >
-                  +
-                </button>
+                {alreadyAdded ? (
+                  <div>
+                    {/* TODO wizualizacja */}
+                    ok
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      dispatch(new AddLocationAction({ locationId: item.id }));
+                    }}
+                    className="bg-green-500 hover:bg-green-600 text-white px-2 rounded"
+                    title="Add location"
+                  >
+                    +
+                  </button>
+                )}
               </div>
             </div>
           );

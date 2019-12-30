@@ -1,12 +1,16 @@
 export const API_KEY = 'a6f5e71270d6cf818259c65eee77cd8d';
 
 export interface State {
-  counter?: number;
+  saveLocationIds: number[];
 }
 
 export interface StateAction {
   type: string;
   payload?: any;
+}
+
+export interface AddLocationActionPayload {
+  locationId: number;
 }
 
 export interface CardContainerProps {

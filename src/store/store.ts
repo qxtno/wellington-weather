@@ -2,7 +2,7 @@ import React from 'react';
 import { StateAction, State } from '../types';
 
 const stateContext = React.createContext<[State, React.Dispatch<StateAction>]>([
-  {},
+  {} as any,
   {} as any
 ]);
 

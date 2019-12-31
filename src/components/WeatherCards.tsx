@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
-import { CardContainerProps } from '../types';
+import { CardContainerProps, WeatherCardProps } from '../types';
 import { Link } from 'react-router-dom';
+import { stateContext } from '../store/store';
+import { useWeatherCardState } from '../hooks/useWeatherCardState';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
@@ -26,15 +28,35 @@ const AddLocationCard: React.FC = () => {
   );
 };
 
+const WeatherCard: React.FC<WeatherCardProps> = ({ locationId }) => {
+  // const weatherInfo =
+  const { cityName } = useWeatherCardState(locationId);
+
+  function render() {
+    return (
+      <CardContainer>
+        hej moje id: {locationId}
+        <div>city name:{cityName}</div>
+      </CardContainer>
+    );
+  }
+
+  return render();
+};
+
 export const WeatherCards: React.FC = () => {
+  const [state] = useContext(stateContext);
+  const { saveLocationIds } = state;
+
+  function displayCards() {
+    return saveLocationIds.map(locationId => (
+      <WeatherCard key={locationId} locationId={locationId} />
+    ));
+  }
+
   return (
     <div className="flex flex-wrap justify-center">
-      <AddLocationCard />
-      <AddLocationCard />
-      <AddLocationCard />
-      <AddLocationCard />
-      <AddLocationCard />
-      <AddLocationCard />
+      {displayCards()}
       <AddLocationCard />
     </div>
   );

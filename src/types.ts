@@ -35,3 +35,7 @@ export interface FindResponseJson {
   count: number;
   list: SearchItem[];
 }
+
+export interface WeatherCardProps {
+  locationId: number;
+}

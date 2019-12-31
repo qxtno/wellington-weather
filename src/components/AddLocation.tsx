@@ -3,6 +3,8 @@ import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
 import { stateContext } from '../store/store';
 import { AddLocationAction } from '../store/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -51,8 +53,7 @@ export const AddLocation: React.FC = () => {
           const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100';
           const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
 
-          const alreadyAdded =
-            saveLocationIds.find(p => p === item.id) ?? false;
+          const alreadyAdded = saveLocationIds.find(p => p === item.id) != null;
 
           return (
             <div key={item.id} className={itemClass}>
@@ -69,19 +70,18 @@ export const AddLocation: React.FC = () => {
               </div>
               <div>
                 {alreadyAdded ? (
-                  <div>
-                    {/* TODO wizualizacja */}
-                    ok
+                  <div className="bg-blue-500 text-white text-center rounded w-8">
+                    <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                   </div>
                 ) : (
                   <button
                     onClick={() => {
                       dispatch(new AddLocationAction({ locationId: item.id }));
                     }}
-                    className="bg-green-500 hover:bg-green-600 text-white px-2 rounded"
+                    className="bg-green-500 hover:bg-green-600 text-white rounded w-8"
                     title="Add location"
                   >
-                    +
+                    <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                   </button>
                 )}
               </div>

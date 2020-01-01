@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { buildApiUrl } from '../utils';
-import { SavedLocation } from '../types';
+import { SavedLocation, WeatherInfo, WeatherResponseJson } from '../types';
 
 export function useWeatherCardState(savedLocation: SavedLocation) {
-  // api.openweathermap.org/data/2.5/weather?id=2172797
-
-  const [cityName, setCityName] = useState('name?');
+  const [weatherInfo, setWeatherInfo] = useState<WeatherInfo>();
 
   useEffect(() => {
     async function fetchWeather() {
@@ -14,8 +12,15 @@ export function useWeatherCardState(savedLocation: SavedLocation) {
           `/weather?lat=${savedLocation.lat}&lon=${savedLocation.lon}`
         );
         const response = await fetch(dataURL);
-        const json = await response.json();
+        const json: WeatherResponseJson = await response.json();
         console.warn('weather', json);
+
+        setWeatherInfo({
+          sky: json.weather[0].main,
+          temp: json.main.temp,
+          temp_max: json.main.temp_max,
+          temp_min: json.main.temp_min
+        });
       } catch (error) {
         // hasError = true;
       }
@@ -23,5 +28,5 @@ export function useWeatherCardState(savedLocation: SavedLocation) {
     fetchWeather();
   }, [savedLocation.lat, savedLocation.lon]);
 
-  return { cityName };
+  return { weatherInfo };
 }

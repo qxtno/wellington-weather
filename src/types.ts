@@ -44,6 +44,23 @@ export interface FindResponseJson {
   list: SearchItem[];
 }
 
+export interface WeatherResponseJson {
+  cod: '200' | '400' | string;
+  main: {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+  };
+  weather: { main: string }[];
+}
+
 export interface WeatherCardProps {
   savedLocation: SavedLocation;
+}
+
+export interface WeatherInfo {
+  temp: number;
+  temp_min: number;
+  temp_max: number;
+  sky: string;
 }

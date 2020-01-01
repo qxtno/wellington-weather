@@ -29,13 +29,16 @@ const AddLocationCard: React.FC = () => {
 };
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
-  // const weatherInfo =
-  const { cityName } = useWeatherCardState(savedLocation); // TODO replace with lat and lon?
+  const { weatherInfo } = useWeatherCardState(savedLocation); // TODO replace with lat and lon?
 
   function render() {
     return (
       <CardContainer>
         <div>{savedLocation.name}</div>
+        <p>{weatherInfo?.sky}</p>
+        <p>{weatherInfo?.temp.toFixed(0)}</p>
+        <p>{weatherInfo?.temp_min.toFixed(0)}</p>
+        <p>{weatherInfo?.temp_max.toFixed(0)}</p>
       </CardContainer>
     );
   }

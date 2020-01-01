@@ -4,6 +4,7 @@ import { CardContainerProps, WeatherCardProps } from '../types';
 import { Link } from 'react-router-dom';
 import { stateContext } from '../store/store';
 import { useWeatherCardState } from '../hooks/useWeatherCardState';
+import { getIconUrl } from '../utils';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
@@ -33,12 +34,23 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
 
   function render() {
     return (
-      <CardContainer>
-        <div>{savedLocation.name}</div>
-        <p>{weatherInfo?.sky}</p>
-        <p>{weatherInfo?.temp.toFixed(0)}</p>
-        <p>{weatherInfo?.temp_min.toFixed(0)}</p>
-        <p>{weatherInfo?.temp_max.toFixed(0)}</p>
+      <CardContainer className="bg-green-200">
+        <div className="h-full flex flex-col text-center py-2">
+          <p>{savedLocation.name}</p>
+          <div className="flex-1 flex items-center justify-center">
+            <img
+              src={weatherInfo?.icon ? getIconUrl(weatherInfo.icon) : ''}
+              alt="weather icon"
+            />
+          </div>
+          <p className="text-xl">
+            {weatherInfo?.temp.toFixed(0)}°C {weatherInfo?.sky}
+          </p>
+          <p className="pt-2">
+            min temp: {weatherInfo?.temp_min.toFixed(0)}°C | max temp:{' '}
+            {weatherInfo?.temp_max.toFixed(0)}°C
+          </p>
+        </div>
       </CardContainer>
     );
   }

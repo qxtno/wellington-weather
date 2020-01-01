@@ -7,3 +7,7 @@ import { API_URL, API_KEY } from './types';
 export function buildApiUrl(part: string) {
   return `${API_URL}${part}&units=metric&APPID=${API_KEY}`;
 }
+
+export function getIconUrl(icon: string) {
+  return `https://openweathermap.org/img/wn/${icon}@2x.png`;
+}

@@ -19,7 +19,8 @@ export function useWeatherCardState(savedLocation: SavedLocation) {
           sky: json.weather[0].main,
           temp: json.main.temp,
           temp_max: json.main.temp_max,
-          temp_min: json.main.temp_min
+          temp_min: json.main.temp_min,
+          icon: json.weather[0].icon
         });
       } catch (error) {
         // hasError = true;

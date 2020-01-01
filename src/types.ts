@@ -51,7 +51,10 @@ export interface WeatherResponseJson {
     temp_min: number;
     temp_max: number;
   };
-  weather: { main: string }[];
+  weather: {
+    main: string;
+    icon: string;
+  }[];
 }
 
 export interface WeatherCardProps {
@@ -63,4 +66,5 @@ export interface WeatherInfo {
   temp_min: number;
   temp_max: number;
   sky: string;
+  icon: string;
 }

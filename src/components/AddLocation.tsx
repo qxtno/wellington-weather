@@ -16,7 +16,7 @@ export const AddLocation: React.FC = () => {
   } = useAddLocationState();
 
   const [state, dispatch] = useContext(stateContext);
-  const { saveLocationIds } = state;
+  const { savedLocations } = state;
 
   function searchSection() {
     return (
@@ -53,11 +53,13 @@ export const AddLocation: React.FC = () => {
           const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100';
           const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
 
-          const alreadyAdded = saveLocationIds.find(p => p === item.id) != null;
+          const alreadyAdded =
+            savedLocations.find(p => p.id === item.id) != null;
+          const name = `${item.name}, ${item.sys.country}`;
 
           return (
             <div key={item.id} className={itemClass}>
-              <div>{`${item.name}, ${item.sys.country}`}</div>
+              <div>{name}</div>
               <div className="px-2 flex-1">
                 <a
                   className="hover:underline text-blue-600"
@@ -76,7 +78,16 @@ export const AddLocation: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => {
-                      dispatch(new AddLocationAction({ locationId: item.id }));
+                      dispatch(
+                        new AddLocationAction({
+                          savedLocation: {
+                            id: item.id,
+                            lat: item.coord.lat,
+                            lon: item.coord.lon,
+                            name
+                          }
+                        })
+                      );
                     }}
                     className="bg-green-500 hover:bg-green-600 text-white rounded w-8"
                     title="Add location"

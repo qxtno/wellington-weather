@@ -1,7 +1,15 @@
 export const API_KEY = 'a6f5e71270d6cf818259c65eee77cd8d';
+export const API_URL = 'https://api.openweathermap.org/data/2.5';
 
 export interface State {
-  saveLocationIds: number[];
+  savedLocations: SavedLocation[];
+}
+
+export interface SavedLocation {
+  id: number;
+  name: string;
+  lat: number;
+  lon: number;
 }
 
 export interface StateAction {
@@ -10,7 +18,7 @@ export interface StateAction {
 }
 
 export interface AddLocationActionPayload {
-  locationId: number;
+  savedLocation: SavedLocation;
 }
 
 export interface CardContainerProps {
@@ -37,5 +45,5 @@ export interface FindResponseJson {
 }
 
 export interface WeatherCardProps {
-  locationId: number;
+  savedLocation: SavedLocation;
 }

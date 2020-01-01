@@ -28,15 +28,14 @@ const AddLocationCard: React.FC = () => {
   );
 };
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ locationId }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
   // const weatherInfo =
-  const { cityName } = useWeatherCardState(locationId);
+  const { cityName } = useWeatherCardState(savedLocation); // TODO replace with lat and lon?
 
   function render() {
     return (
       <CardContainer>
-        hej moje id: {locationId}
-        <div>city name:{cityName}</div>
+        <div>{savedLocation.name}</div>
       </CardContainer>
     );
   }
@@ -46,11 +45,11 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ locationId }) => {
 
 export const WeatherCards: React.FC = () => {
   const [state] = useContext(stateContext);
-  const { saveLocationIds } = state;
+  const { savedLocations } = state;
 
   function displayCards() {
-    return saveLocationIds.map(locationId => (
-      <WeatherCard key={locationId} locationId={locationId} />
+    return savedLocations.map(savedLocation => (
+      <WeatherCard key={savedLocation.id} savedLocation={savedLocation} />
     ));
   }
 

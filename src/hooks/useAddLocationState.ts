@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
-import { API_KEY, SearchItem, FindResponseJson } from '../types';
+import { SearchItem, FindResponseJson } from '../types';
+import { buildApiUrl } from '../utils';
 
 export function useAddLocationState() {
   const [search, setSearch] = useState('');
@@ -12,12 +13,7 @@ export function useAddLocationState() {
     let list: SearchItem[] = [];
     let hasError = false;
     try {
-      const dataURL =
-        'https://api.openweathermap.org/data/2.5/find?q=' +
-        search +
-        '&sort=population' +
-        '&APPID=' +
-        API_KEY;
+      const dataURL = buildApiUrl(`/find?q=${search}&sort=population`);
       const response = await fetch(dataURL);
       const json: FindResponseJson = await response.json();
       console.warn('json', json);

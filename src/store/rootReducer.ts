@@ -2,7 +2,7 @@ import { State, StateAction, AddLocationActionPayload } from '../types';
 import { ADD_LOCATION } from './actions';
 
 export const initialState: State = {
-  saveLocationIds: []
+  savedLocations: []
 };
 
 export const rootReducer = (state: State, action: StateAction) => {
@@ -10,11 +10,11 @@ export const rootReducer = (state: State, action: StateAction) => {
     case ADD_LOCATION: {
       return {
         ...state,
-        saveLocationIds: [
-          ...state.saveLocationIds,
-          (action.payload as AddLocationActionPayload).locationId
+        savedLocations: [
+          ...state.savedLocations,
+          (action.payload as AddLocationActionPayload).savedLocation
         ]
-      };
+      } as State;
     }
     default:
       return state;

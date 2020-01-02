@@ -13,10 +13,13 @@ export interface SavedLocation {
   lon: number;
 }
 
-export interface StateAction {
-  type: string;
-  payload?: any;
-}
+export type StateActionType = 'ADD_LOCATION';
+
+export type StateAction = {
+  type: StateActionType;
+  payload: AddLocationActionPayload;
+};
+//| { type: 'DELETE_MENU', payload: { menuId: number, folderId: number } };
 
 export interface AddLocationActionPayload {
   savedLocation: SavedLocation;

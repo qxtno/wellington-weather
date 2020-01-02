@@ -1,5 +1,4 @@
-import { State, StateAction, AddLocationActionPayload } from '../types';
-import { ADD_LOCATION } from './actions';
+import { State, StateAction } from '../types';
 import { STORE_VERSION } from './store';
 
 export const initialState: State = {
@@ -9,13 +8,10 @@ export const initialState: State = {
 
 export const rootReducer = (state: State, action: StateAction) => {
   switch (action.type) {
-    case ADD_LOCATION: {
+    case 'ADD_LOCATION': {
       return {
         ...state,
-        savedLocations: [
-          ...state.savedLocations,
-          (action.payload as AddLocationActionPayload).savedLocation
-        ]
+        savedLocations: [...state.savedLocations, action.payload.savedLocation]
       } as State;
     }
     default:

@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
 import { stateContext } from '../store/store';
-import { AddLocationAction } from '../store/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { AddLocationAction } from '../store/actions';
 
 export const AddLocation: React.FC = () => {
   const {

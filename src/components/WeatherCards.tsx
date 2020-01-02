@@ -30,7 +30,11 @@ const AddLocationCard: React.FC = () => {
 };
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
-  const { weatherInfo } = useWeatherCardState(savedLocation); // TODO replace with lat and lon?
+  const { weatherInfo } = useWeatherCardState(savedLocation);
+
+  function format(temp: number | undefined) {
+    return `${temp?.toFixed(0)}°C`;
+  }
 
   function render() {
     return (
@@ -44,11 +48,11 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
             />
           </div>
           <p className="text-xl">
-            {weatherInfo?.temp.toFixed(0)}°C {weatherInfo?.sky}
+            {format(weatherInfo?.temp)} {weatherInfo?.sky}
           </p>
           <p className="pt-2">
-            min temp: {weatherInfo?.temp_min.toFixed(0)}°C | max temp:{' '}
-            {weatherInfo?.temp_max.toFixed(0)}°C
+            min temp: {format(weatherInfo?.temp_min)} | max temp:{' '}
+            {format(weatherInfo?.temp_max)}
           </p>
         </div>
       </CardContainer>

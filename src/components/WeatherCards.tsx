@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { CardContainerProps, WeatherCardProps } from '../types';
 import { Link } from 'react-router-dom';
-import { stateContext } from '../store/store';
+import { useAppState } from '../store/store';
 import { useWeatherCardState } from '../hooks/useWeatherCardState';
 import { getIconUrl } from '../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -63,8 +63,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
 };
 
 export const WeatherCards: React.FC = () => {
-  const [state] = useContext(stateContext);
-  const { savedLocations } = state;
+  const { savedLocations } = useAppState();
 
   function displayCards() {
     return savedLocations.map(savedLocation => (

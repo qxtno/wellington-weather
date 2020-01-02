@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
-import { stateContext } from '../store/store';
+import { useDispatch, useAppState } from '../store/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { AddLocationAction } from '../store/actions';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -15,8 +14,8 @@ export const AddLocation: React.FC = () => {
     searchList
   } = useAddLocationState();
 
-  const [state, dispatch] = useContext(stateContext);
-  const { savedLocations } = state;
+  const dispatch = useDispatch();
+  const { savedLocations } = useAppState();
 
   function searchSection() {
     return (
@@ -78,16 +77,17 @@ export const AddLocation: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => {
-                      dispatch(
-                        new AddLocationAction({
+                      dispatch({
+                        type: 'ADD_LOCATION',
+                        payload: {
                           savedLocation: {
                             id: item.id,
                             lat: item.coord.lat,
                             lon: item.coord.lon,
                             name
                           }
-                        })
-                      );
+                        }
+                      });
                     }}
                     className="bg-green-500 hover:bg-green-600 text-white rounded w-8"
                     title="Add location"

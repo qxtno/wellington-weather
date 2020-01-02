@@ -11,15 +11,18 @@ export interface SavedLocation {
   name: string;
   lat: number;
   lon: number;
+  weatherInfo?: WeatherInfo;
 }
 
-export type StateActionType = 'ADD_LOCATION';
-
-export type StateAction = {
-  type: StateActionType;
-  payload: AddLocationActionPayload;
-};
-//| { type: 'DELETE_MENU', payload: { menuId: number, folderId: number } };
+export type StateAction =
+  | {
+      type: 'ADD_LOCATION';
+      payload: AddLocationActionPayload;
+    }
+  | {
+      type: 'SET_WEATHER_INFO';
+      payload: { locationId: number; weatherInfo: WeatherInfo };
+    };
 
 export interface AddLocationActionPayload {
   savedLocation: SavedLocation;
@@ -71,4 +74,5 @@ export interface WeatherInfo {
   temp_max: number;
   sky: string;
   icon: string;
+  fetchTime: number;
 }

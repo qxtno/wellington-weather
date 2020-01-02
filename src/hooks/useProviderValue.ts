@@ -1,6 +1,7 @@
 import { State } from '../types';
 import { useReducer, useEffect } from 'react';
 import { rootReducer, initialState } from '../store/rootReducer';
+import { STORE_VERSION } from '../store/store';
 
 export function useProviderValue() {
   const localStateString = localStorage.getItem('state');
@@ -10,8 +11,15 @@ export function useProviderValue() {
   const providerValue = useReducer(rootReducer, localState ?? initialState);
   const [state] = providerValue;
 
+  if (STORE_VERSION !== state.STORE_VERSION) {
+    localStorage.removeItem('state');
+    window.location.reload();
+  }
+
   useEffect(() => {
-    localStorage.setItem('state', JSON.stringify(state));
+    if (STORE_VERSION === state.STORE_VERSION) {
+      localStorage.setItem('state', JSON.stringify(state));
+    }
   }, [state]);
 
   return providerValue;

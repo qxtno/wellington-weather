@@ -1,7 +1,9 @@
 import { State, StateAction, AddLocationActionPayload } from '../types';
 import { ADD_LOCATION } from './actions';
+import { STORE_VERSION } from './store';
 
 export const initialState: State = {
+  STORE_VERSION: STORE_VERSION,
   savedLocations: []
 };
 

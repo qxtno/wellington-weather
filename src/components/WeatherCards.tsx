@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom';
 import { stateContext } from '../store/store';
 import { useWeatherCardState } from '../hooks/useWeatherCardState';
 import { getIconUrl } from '../utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
   className = 'bg-gray-200'
 }) => {
-  const cardClass = classNames(
-    'h-64 m-2 p-2 rounded shadow-md w-64',
-    className
-  );
+  const cardClass = classNames('h-64 m-2 rounded shadow-md w-64', className);
 
   return <div className={cardClass}>{children}</div>;
 };
@@ -21,9 +20,10 @@ const CardContainer: React.FC<CardContainerProps> = ({
 const AddLocationCard: React.FC = () => {
   return (
     <CardContainer>
-      <div>hej</div>
       <Link to="/add-location">
-        <button>dodaj</button>
+        <div className="flex h-full items-center justify-center text-6xl text-green-300">
+          <FontAwesomeIcon icon={faPlus} />
+        </div>
       </Link>
     </CardContainer>
   );
@@ -35,7 +35,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
   function render() {
     return (
       <CardContainer className="bg-green-200">
-        <div className="h-full flex flex-col text-center py-2">
+        <div className="h-full flex flex-col text-center px-2 py-4">
           <p>{savedLocation.name}</p>
           <div className="flex-1 flex items-center justify-center">
             <img

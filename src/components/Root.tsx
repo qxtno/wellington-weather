@@ -11,7 +11,7 @@ export const Root: React.FC = () => {
         className="h-full w-full"
         style={{ display: 'grid', gridTemplateRows: 'auto 80px' }}
       >
-        <main className="overflow-auto">
+        <main className="overflow-auto bg-gray-100">
           <div className="p-2 pb-4 max-w-3xl xl:max-w-4xl mx-auto">
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -26,7 +26,7 @@ export const Root: React.FC = () => {
           </div>
         </main>
         <div
-          className="bg-gray-200 z-0"
+          className="bg-blue-200 z-0"
           style={{
             gridRow: 2,
             boxShadow:

@@ -10,7 +10,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
-  className = 'bg-gray-200'
+  className = 'bg-gray-300'
 }) => {
   const cardClass = classNames('h-64 m-2 rounded shadow-md w-64', className);
 
@@ -21,7 +21,7 @@ const AddLocationCard: React.FC = () => {
   return (
     <CardContainer>
       <Link to="/add-location">
-        <div className="flex h-full items-center justify-center text-6xl text-green-300">
+        <div className="flex h-full items-center justify-center text-6xl text-blue-300">
           <FontAwesomeIcon icon={faPlus} />
         </div>
       </Link>
@@ -38,7 +38,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ savedLocation }) => {
 
   function render() {
     return (
-      <CardContainer className="bg-green-200">
+      <CardContainer className="bg-blue-200">
         <div className="h-full flex flex-col text-center px-2 py-4">
           <p>{savedLocation.name}</p>
           <div className="flex-1 flex items-center justify-center">

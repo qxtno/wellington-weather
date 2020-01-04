@@ -1,22 +1,29 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { WeatherCard } from './WeatherCards';
-import { useAppState } from '../store/store';
+import { useForecastState } from '../hooks/useForecastState';
 
-export const Forecast: React.FC = props => {
-  const { id } = useParams();
-  const { savedLocations } = useAppState();
-  const saveLocation = savedLocations.find(
-    location => location.id === Number(id)
-  );
+export const Forecast: React.FC = () => {
+  const { error, forecastInfos, savedLocation } = useForecastState();
 
-  console.log('props', props, id);
   return (
     <div>
       <div className="flex justify-center">
-        {saveLocation && <WeatherCard savedLocation={saveLocation} />}
+        {savedLocation && <WeatherCard savedLocation={savedLocation} />}
       </div>
-      <div> TODO: Forecast </div>
+      <div>
+        TODO: Forecast
+        <div>
+          {forecastInfos?.map(wi => {
+            return (
+              <div key={wi.dt}>
+                <div>id: {wi.dt}</div>
+                {wi.temp}
+              </div>
+            );
+          })}
+        </div>
+        {error}
+      </div>
     </div>
   );
 };

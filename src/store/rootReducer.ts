@@ -4,7 +4,8 @@ import produce from 'immer';
 
 export const initialState: State = {
   STORE_VERSION: STORE_VERSION,
-  savedLocations: []
+  savedLocations: [],
+  savedForecasts: {}
 };
 
 export const rootReducer = (state: State, action: StateAction): State => {
@@ -21,6 +22,11 @@ export const rootReducer = (state: State, action: StateAction): State => {
         if (savedLocation != null) {
           savedLocation.weatherInfo = action.payload.weatherInfo;
         }
+      });
+    case 'SET_FORECAST_INFO':
+      return produce(state, (draft: State) => {
+        const { locationId, savedForecastInfo } = action.payload;
+        draft.savedForecasts[locationId] = savedForecastInfo;
       });
     default:
       return state;

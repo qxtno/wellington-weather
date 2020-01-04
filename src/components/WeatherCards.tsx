@@ -4,7 +4,7 @@ import { CardContainerProps, WeatherCardProps } from '../types';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../store/store';
 import { useWeatherCardState } from '../hooks/useWeatherCardState';
-import { getIconUrl } from '../utils';
+import { getIconUrl, formatToCelsius } from '../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -34,10 +34,6 @@ const WeatherCardContent: React.FC<WeatherCardProps & {
 }> = ({ savedLocation, navigateTo }) => {
   const { weatherInfo } = useWeatherCardState(savedLocation);
 
-  function format(temp: number | undefined) {
-    return `${temp?.toFixed(0)}°C`;
-  }
-
   function cardContent() {
     return (
       <div className="h-full flex flex-col text-center px-2 py-4">
@@ -49,11 +45,11 @@ const WeatherCardContent: React.FC<WeatherCardProps & {
           />
         </div>
         <p className="text-xl">
-          {format(weatherInfo?.temp)} {weatherInfo?.sky}
+          {formatToCelsius(weatherInfo?.temp)} {weatherInfo?.sky}
         </p>
         <p className="pt-2">
-          min temp: {format(weatherInfo?.temp_min)} | max temp:{' '}
-          {format(weatherInfo?.temp_max)}
+          min temp: {formatToCelsius(weatherInfo?.temp_min)} | max temp:{' '}
+          {formatToCelsius(weatherInfo?.temp_max)}
         </p>
       </div>
     );

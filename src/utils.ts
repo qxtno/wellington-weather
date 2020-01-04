@@ -27,3 +27,7 @@ export function timeInLastPeriod({
   const diff = Math.abs(Date.now() - time);
   return diff < periodDuration;
 }
+
+export function formatToCelsius(temp: number | undefined) {
+  return `${temp?.toFixed(0)}°C`;
+}

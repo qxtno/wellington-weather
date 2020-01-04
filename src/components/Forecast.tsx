@@ -1,6 +1,8 @@
 import React from 'react';
 import { WeatherCard } from './WeatherCards';
 import { useForecastState } from '../hooks/useForecastState';
+import classNames from 'classnames';
+import { getIconUrl, formatToCelsius } from '../utils';
 
 export const Forecast: React.FC = () => {
   const { error, forecastInfos, savedLocation } = useForecastState();
@@ -11,13 +13,42 @@ export const Forecast: React.FC = () => {
         {savedLocation && <WeatherCard savedLocation={savedLocation} />}
       </div>
       <div>
-        TODO: Forecast
-        <div>
-          {forecastInfos?.map(wi => {
+        <p className="flex justify-center pb-2 text-2xl text-gray-800">
+          Forecast:
+        </p>
+        <div className="flex overflow-auto">
+          {forecastInfos?.map((forecastInfo, index) => {
+            const itemClassList = classNames({ 'pl-2': index !== 0 });
+            const forecastDt = new Date(forecastInfo.dt);
+            const dateTimeString =
+              ('0' + forecastDt.getHours()).slice(-2) +
+              ':' +
+              ('0' + forecastDt.getMinutes()).slice(-2) +
+              ' ' +
+              ('0' + forecastDt.getDate()).slice(-2) +
+              '.' +
+              ('0' + (forecastDt.getMonth() + 1)).slice(-2);
+
             return (
-              <div key={wi.dt}>
-                <div>id: {wi.dt}</div>
-                {wi.temp}
+              <div key={forecastInfo.dt} className={itemClassList}>
+                <div className="h-64 w-64 flex flex-col text-center px-4 py-4 bg-blue-200 rounded">
+                  <p>{dateTimeString}</p>
+                  <div className="flex-1 flex items-center justify-center">
+                    <img
+                      src={
+                        forecastInfo?.icon ? getIconUrl(forecastInfo.icon) : ''
+                      }
+                      alt="weather icon"
+                    />
+                  </div>
+                  <p className="text-xl">
+                    {formatToCelsius(forecastInfo?.temp)} {forecastInfo?.sky}
+                  </p>
+                  <p className="pt-2 whitespace-no-wrap">
+                    min temp: {formatToCelsius(forecastInfo?.temp_min)} | max
+                    temp: {formatToCelsius(forecastInfo?.temp_max)}
+                  </p>
+                </div>
               </div>
             );
           })}

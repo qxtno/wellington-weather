@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
 import { useDispatch, useAppState } from '../store/store';
@@ -24,10 +24,16 @@ export const AddLocation: React.FC = () => {
     { 'cursor-not-allowed': isSearching }
   );
 
+  const ref = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    ref?.current?.focus();
+  }, []);
+
   function searchSection() {
     return (
       <div className="flex max-w-sm mx-auto">
         <input
+          ref={ref}
           className="border flex-1 px-2 rounded min-w-0"
           value={search}
           onChange={e => setSearch(e.target.value)}

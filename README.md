@@ -1,3 +1,12 @@
+### Features
+
+- [x] Add weather card location
+- [x] Display weather for cards
+- [ ] Detail weather for single card
+- [ ] Delete cards option
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

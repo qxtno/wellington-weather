@@ -3,6 +3,7 @@ import { Nav } from './Nav';
 import { WeatherCards } from './WeatherCards';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AddLocation } from './AddLocation';
+import { Forecast } from './Forecast';
 
 export const Root: React.FC = () => {
   return (
@@ -18,6 +19,9 @@ export const Root: React.FC = () => {
             <Switch>
               <Route path="/add-location">
                 <AddLocation />
+              </Route>
+              <Route path="/forecast/:id">
+                <Forecast />
               </Route>
               <Route path="/">
                 <WeatherCards />

@@ -10,7 +10,7 @@ export const Root: React.FC = () => {
     <Router>
       <div
         className="h-full w-full"
-        style={{ display: 'grid', gridTemplateRows: 'auto 80px' }}
+        style={{ display: 'grid', gridTemplateRows: 'auto 60px' }}
       >
         <main className="overflow-auto bg-gray-100">
           <div className="p-2 pb-4 max-w-3xl xl:max-w-4xl mx-auto">

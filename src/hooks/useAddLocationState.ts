@@ -6,10 +6,16 @@ export function useAddLocationState() {
   const [search, setSearch] = useState('');
   const [searchList, setSearchList] = useState<SearchItem[]>([]);
   const [error, setError] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
   const onSearch = useCallback(async () => {
-    // TODO prevent race condition
+    if (isSearching) {
+      return;
+    }
     console.log('searching for...', search);
+
+    setIsSearching(true);
+
     let list: SearchItem[] = [];
     let hasError = false;
     try {
@@ -24,6 +30,8 @@ export function useAddLocationState() {
       }
     } catch (error) {
       hasError = true;
+    } finally {
+      setIsSearching(false);
     }
     if (hasError) {
       setError(`Unable to find city: '${search}'`);
@@ -35,7 +43,7 @@ export function useAddLocationState() {
       }
     }
     setSearchList(list);
-  }, [search]);
+  }, [isSearching, search]);
 
-  return { search, setSearch, onSearch, error, searchList };
+  return { search, setSearch, onSearch, error, searchList, isSearching };
 }

@@ -3,7 +3,7 @@ import { useAddLocationState } from '../hooks/useAddLocationState';
 import classNames from 'classnames';
 import { useDispatch, useAppState } from '../store/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -11,11 +11,18 @@ export const AddLocation: React.FC = () => {
     setSearch,
     onSearch,
     error,
-    searchList
+    searchList,
+    isSearching
   } = useAddLocationState();
 
   const dispatch = useDispatch();
   const { savedLocations } = useAppState();
+
+  const searchButtonClassList = classNames(
+    'rounded bg-gray-200 ml-2 px-4 p-1 ',
+    { 'hover:bg-gray-300': !isSearching },
+    { 'cursor-not-allowed': isSearching }
+  );
 
   function searchSection() {
     return (
@@ -29,9 +36,15 @@ export const AddLocation: React.FC = () => {
           }}
         />
         <button
-          className="rounded bg-gray-200 ml-2 px-4 p-1 hover:bg-gray-300"
+          className={searchButtonClassList}
           onClick={onSearch}
+          disabled={isSearching}
         >
+          {isSearching && (
+            <span className="pr-2">
+              <FontAwesomeIcon icon={faSpinner} spin />
+            </span>
+          )}
           Search
         </button>
       </div>

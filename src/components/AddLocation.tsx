@@ -66,8 +66,14 @@ export const AddLocation: React.FC = () => {
   }
 
   function errorSection() {
+    const errorClassList = classNames(
+      'flex justify-center',
+      { 'text-white': darkTheme },
+      { '': !darkTheme }
+    );
+
     if (error) {
-      return <div className="flex justify-center">{error}</div>;
+      return <div className={errorClassList}>{error}</div>;
     }
     return null;
   }

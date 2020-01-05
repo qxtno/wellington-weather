@@ -6,6 +6,7 @@ export const initialState: State = {
   STORE_VERSION: STORE_VERSION,
   savedLocations: [],
   savedForecasts: {},
+  darkTheme: false,
   notSaved: {
     settingsDrawerOpen: false
   }
@@ -48,6 +49,8 @@ export const rootReducer = (state: State, action: StateAction): State => {
           p => p.id !== locationId
         );
       });
+    case 'TOGGLE_THEME':
+      return { ...state, darkTheme: !state.darkTheme };
     default:
       return state;
   }

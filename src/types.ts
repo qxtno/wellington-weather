@@ -5,6 +5,7 @@ export interface State {
   STORE_VERSION: number;
   savedLocations: SavedLocation[];
   savedForecasts: SavedForecastInfoIndex;
+  darkTheme: boolean;
   notSaved: {
     settingsDrawerOpen: boolean;
   };
@@ -51,7 +52,8 @@ export type StateAction =
     }
   | { type: 'OPEN_SETTINGS_DRAWER' }
   | { type: 'CLOSE_SETTINGS_DRAWER' }
-  | { type: 'REMOVE_LOCATION'; payload: { locationId: number } };
+  | { type: 'REMOVE_LOCATION'; payload: { locationId: number } }
+  | { type: 'TOGGLE_THEME' };
 export interface AddLocationActionPayload {
   savedLocation: SavedLocation;
 }

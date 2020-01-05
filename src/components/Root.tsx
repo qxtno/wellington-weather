@@ -6,15 +6,25 @@ import { AddLocation } from './AddLocation';
 import { Forecast } from './Forecast';
 import { SettingsDrawer } from './SettingsDrawer';
 import { DeleteSavedLocation } from './DeleteSavedLocation';
+import classNames from 'classnames';
+import { useAppState } from '../store/store';
 
 export const Root: React.FC = () => {
+  const { darkTheme } = useAppState();
+
+  const mainClassList = classNames(
+    'overflow-auto',
+    { 'bg-gray-800': darkTheme },
+    { 'bg-gray-100': !darkTheme }
+  );
+
   return (
     <Router>
       <div
         className="h-full w-full relative"
         style={{ display: 'grid', gridTemplateRows: 'auto 60px' }}
       >
-        <main className="overflow-auto bg-gray-100">
+        <main className={mainClassList}>
           <div className="p-2 pb-4 max-w-3xl xl:max-w-4xl mx-auto">
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

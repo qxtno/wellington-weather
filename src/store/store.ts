@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StateAction, State } from '../types';
 
-export const STORE_VERSION = 2;
+export const STORE_VERSION = 4;
 
 const stateContext = React.createContext<[State, React.Dispatch<StateAction>]>([
   {} as any,

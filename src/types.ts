@@ -59,7 +59,7 @@ export interface AddLocationActionPayload {
 }
 
 export interface CardContainerProps {
-  className?: string;
+  className: string;
 }
 
 export interface SearchItem {

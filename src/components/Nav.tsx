@@ -3,9 +3,10 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCog } from '@fortawesome/free-solid-svg-icons';
 import { useAppState, useDispatch } from '../store/store';
+import classNames from 'classnames';
 
 export const Nav: React.FC = () => {
-  const { notSaved } = useAppState();
+  const { notSaved, darkTheme } = useAppState();
   const settingsDrawerOpen = notSaved?.settingsDrawerOpen;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,6 +19,12 @@ export const Nav: React.FC = () => {
     }
   }
 
+  const navBtnClassList = classNames(
+    'rounded px-4 py-2',
+    { 'hover:bg-blue-700 ': darkTheme },
+    { 'hover:bg-blue-300': !darkTheme }
+  );
+
   function render() {
     return (
       <div className="flex justify-center items-center h-full">
@@ -27,7 +34,7 @@ export const Nav: React.FC = () => {
             history.push('/');
           }}
         >
-          <div className="rounded hover:bg-blue-300 px-4 py-2">
+          <div className={navBtnClassList}>
             <span className="pr-2">
               <FontAwesomeIcon className="text-xl" icon={faHome} />
             </span>
@@ -36,7 +43,7 @@ export const Nav: React.FC = () => {
         </button>
 
         <button onClick={toggleSettingsDrawer}>
-          <div className="rounded hover:bg-blue-300 px-4 py-2">
+          <div className={navBtnClassList}>
             <span className="pr-2">
               <FontAwesomeIcon className="text-xl" icon={faCog} />
             </span>

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const DeleteSavedLocation: React.FC = () => {
-  const { savedLocations } = useAppState();
+  const { savedLocations, darkTheme } = useAppState();
   const dispatch = useDispatch();
 
   function removeLocation(id: number) {
@@ -15,8 +15,14 @@ export const DeleteSavedLocation: React.FC = () => {
   return (
     <div>
       {savedLocations?.map((item, index) => {
-        const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100';
-        const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
+        const isEven = index % 2 === 0;
+        const itemClass = classNames(
+          'px-2 py-1 flex rounded',
+          { 'bg-blue-800 text-white': darkTheme && isEven },
+          { 'bg-gray-700 text-white': darkTheme && !isEven },
+          { 'bg-blue-100': !darkTheme && isEven },
+          { 'bg-gray-200': !darkTheme && !isEven }
+        );
 
         return (
           <div key={item.id} className={itemClass}>

@@ -17,11 +17,16 @@ export const Root: React.FC = () => {
     { 'bg-gray-800': darkTheme },
     { 'bg-gray-100': !darkTheme }
   );
+  const navClassList = classNames(
+    'z-50',
+    { 'bg-blue-800 text-white': darkTheme },
+    { 'bg-blue-200': !darkTheme }
+  );
 
   return (
     <Router>
       <div
-        className="h-full w-full relative"
+        className="h-full w-full relative overflow-hidden"
         style={{ display: 'grid', gridTemplateRows: 'auto 60px' }}
       >
         <main className={mainClassList}>
@@ -45,7 +50,7 @@ export const Root: React.FC = () => {
           </div>
         </main>
         <div
-          className="bg-blue-200 z-50"
+          className={navClassList}
           style={{
             gridRow: 2,
             boxShadow:

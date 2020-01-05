@@ -10,7 +10,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
-  className = 'bg-gray-300'
+  className
 }) => {
   const cardClass = classNames('h-64 m-2 rounded shadow-md w-64', className);
 
@@ -18,10 +18,21 @@ const CardContainer: React.FC<CardContainerProps> = ({
 };
 
 const AddLocationCard: React.FC = () => {
+  const { darkTheme } = useAppState();
+  const addLocationClassList = classNames(
+    'flex h-full items-center justify-center text-6xl',
+    { 'text-blue-600': darkTheme },
+    { 'text-blue-300': !darkTheme }
+  );
+  const addLocationCardClassList = classNames(
+    { 'bg-gray-700': darkTheme },
+    { 'bg-gray-300': !darkTheme }
+  );
+
   return (
-    <CardContainer>
+    <CardContainer className={addLocationCardClassList}>
       <Link to="/add-location">
-        <div className="flex h-full items-center justify-center text-6xl text-blue-300">
+        <div className={addLocationClassList}>
           <FontAwesomeIcon icon={faPlus} />
         </div>
       </Link>
@@ -33,6 +44,7 @@ const WeatherCardContent: React.FC<WeatherCardProps & {
   navigateTo?: string;
 }> = ({ savedLocation, navigateTo }) => {
   const { weatherInfo } = useWeatherCardState(savedLocation);
+  const { darkTheme } = useAppState();
 
   function cardContent() {
     return (
@@ -55,8 +67,13 @@ const WeatherCardContent: React.FC<WeatherCardProps & {
     );
   }
 
+  const weatherCardClassList = classNames(
+    { 'bg-blue-600 text-white': darkTheme },
+    { 'bg-blue-200': !darkTheme }
+  );
+
   return (
-    <CardContainer className="bg-blue-200">
+    <CardContainer className={weatherCardClassList}>
       {navigateTo ? (
         <Link to={navigateTo}>{cardContent()}</Link>
       ) : (

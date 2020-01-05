@@ -3,9 +3,22 @@ import { WeatherCard } from './WeatherCards';
 import { useForecastState } from '../hooks/useForecastState';
 import classNames from 'classnames';
 import { getIconUrl, formatToCelsius } from '../utils';
+import { useAppState } from '../store/store';
 
 export const Forecast: React.FC = () => {
   const { error, forecastInfos, savedLocation } = useForecastState();
+  const { darkTheme } = useAppState();
+
+  const forecastHeaderClassList = classNames(
+    'flex justify-center pb-2 text-2xl',
+    { 'text-white': darkTheme },
+    { 'text-gray-800': !darkTheme }
+  );
+  const forecastCardClassList = classNames(
+    'h-64 w-64 flex flex-col text-center px-4 py-4 rounded',
+    { 'bg-blue-600 text-white': darkTheme },
+    { 'bg-blue-200': !darkTheme }
+  );
 
   return (
     <div>
@@ -13,9 +26,7 @@ export const Forecast: React.FC = () => {
         {savedLocation && <WeatherCard savedLocation={savedLocation} />}
       </div>
       <div>
-        <p className="flex justify-center pb-2 text-2xl text-gray-800">
-          Forecast:
-        </p>
+        <p className={forecastHeaderClassList}>Forecast:</p>
         <div className="flex overflow-auto">
           {forecastInfos?.map((forecastInfo, index) => {
             const itemClassList = classNames({ 'pl-2': index !== 0 });
@@ -31,7 +42,7 @@ export const Forecast: React.FC = () => {
 
             return (
               <div key={forecastInfo.dt} className={itemClassList}>
-                <div className="h-64 w-64 flex flex-col text-center px-4 py-4 bg-blue-200 rounded">
+                <div className={forecastCardClassList}>
                   <p>{dateTimeString}</p>
                   <div className="flex-1 flex items-center justify-center">
                     <img

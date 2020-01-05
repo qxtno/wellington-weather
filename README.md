@@ -4,7 +4,7 @@
 - [x] Display weather for cards
 - [x] Detail weather for single card
 - [x] Delete cards option
-- [ ] Dark theme
+- [x] Dark theme
 
 ---
 

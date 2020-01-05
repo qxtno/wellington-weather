@@ -16,11 +16,19 @@ export const AddLocation: React.FC = () => {
   } = useAddLocationState();
 
   const dispatch = useDispatch();
-  const { savedLocations } = useAppState();
+  const { savedLocations, darkTheme } = useAppState();
 
+  const inputClassList = classNames(
+    'border flex-1 px-2 rounded min-w-0',
+    { 'bg-gray-700 text-white border-gray-600': darkTheme },
+    { '': !darkTheme }
+  );
   const searchButtonClassList = classNames(
-    'rounded bg-gray-200 ml-2 px-4 p-1 ',
-    { 'hover:bg-gray-300': !isSearching },
+    'rounded ml-2 px-4 p-1 ',
+    { 'text-white bg-gray-700 hover:bg-gray-600': darkTheme && !isSearching },
+    { 'text-white bg-gray-700': darkTheme && isSearching },
+    { 'bg-gray-200 hover:bg-gray-300': !darkTheme && !isSearching },
+    { 'bg-gray-200': !darkTheme && isSearching },
     { 'cursor-not-allowed': isSearching }
   );
 
@@ -34,7 +42,7 @@ export const AddLocation: React.FC = () => {
       <div className="flex max-w-sm mx-auto">
         <input
           ref={ref}
-          className="border flex-1 px-2 rounded min-w-0"
+          className={inputClassList}
           value={search}
           onChange={e => setSearch(e.target.value)}
           onKeyDown={e => {
@@ -68,8 +76,19 @@ export const AddLocation: React.FC = () => {
     return (
       <>
         {searchList.map((item, index) => {
-          const evenOdd = index % 2 === 0 ? 'bg-blue-100' : 'bg-gray-100';
-          const itemClass = classNames('px-2 py-1 flex rounded', evenOdd);
+          const isEven = index % 2 === 0;
+          const itemClass = classNames(
+            'px-2 py-1 flex rounded',
+            { 'bg-blue-800 text-white': darkTheme && isEven },
+            { 'bg-gray-700 text-white': darkTheme && !isEven },
+            { 'bg-blue-100': !darkTheme && isEven },
+            { 'bg-gray-200': !darkTheme && !isEven }
+          );
+          const linkClassList = classNames(
+            'hover:underline',
+            { 'text-blue-300': darkTheme },
+            { 'text-blue-600': !darkTheme }
+          );
 
           const alreadyAdded =
             savedLocations.find(p => p.id === item.id) != null;
@@ -80,7 +99,7 @@ export const AddLocation: React.FC = () => {
               <div>{name}</div>
               <div className="px-2 flex-1">
                 <a
-                  className="hover:underline text-blue-600"
+                  className={linkClassList}
                   href={`https://www.google.com/maps/search/${item.coord.lat},${item.coord.lon}`}
                   target="_blank"
                   rel="noopener noreferrer"

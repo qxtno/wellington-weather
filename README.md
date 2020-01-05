@@ -3,7 +3,7 @@
 - [x] Add weather card location
 - [x] Display weather for cards
 - [x] Detail weather for single card
-- [ ] Delete cards option
+- [x] Delete cards option
 - [ ] Dark theme
 
 ---

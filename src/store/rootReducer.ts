@@ -41,6 +41,13 @@ export const rootReducer = (state: State, action: StateAction): State => {
         ...state,
         notSaved: { ...state.notSaved, settingsDrawerOpen: false }
       };
+    case 'REMOVE_LOCATION':
+      return produce(state, (draft: State) => {
+        const { locationId } = action.payload;
+        draft.savedLocations = draft.savedLocations.filter(
+          p => p.id !== locationId
+        );
+      });
     default:
       return state;
   }

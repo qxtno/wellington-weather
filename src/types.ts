@@ -50,7 +50,8 @@ export type StateAction =
       payload: { locationId: number; savedForecastInfo: SavedForecastInfo };
     }
   | { type: 'OPEN_SETTINGS_DRAWER' }
-  | { type: 'CLOSE_SETTINGS_DRAWER' };
+  | { type: 'CLOSE_SETTINGS_DRAWER' }
+  | { type: 'REMOVE_LOCATION'; payload: { locationId: number } };
 export interface AddLocationActionPayload {
   savedLocation: SavedLocation;
 }

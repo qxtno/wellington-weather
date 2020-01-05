@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AddLocation } from './AddLocation';
 import { Forecast } from './Forecast';
 import { SettingsDrawer } from './SettingsDrawer';
+import { DeleteSavedLocation } from './DeleteSavedLocation';
 
 export const Root: React.FC = () => {
   return (
@@ -23,6 +24,9 @@ export const Root: React.FC = () => {
               </Route>
               <Route path="/forecast/:id">
                 <Forecast />
+              </Route>
+              <Route path="/delete-saved-location">
+                <DeleteSavedLocation />
               </Route>
               <Route path="/">
                 <WeatherCards />

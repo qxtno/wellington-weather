@@ -1,9 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCog } from '@fortawesome/free-solid-svg-icons';
+import { useAppState, useDispatch } from '../store/store';
 
 export const Nav: React.FC = () => {
+  const { notSaved } = useAppState();
+  const settingsDrawerOpen = notSaved?.settingsDrawerOpen;
+  const dispatch = useDispatch();
+
+  function toggleSettingsDrawer() {
+    if (settingsDrawerOpen) {
+      dispatch({ type: 'CLOSE_SETTINGS_DRAWER' });
+    } else {
+      dispatch({ type: 'OPEN_SETTINGS_DRAWER' });
+    }
+  }
+
   function render() {
     return (
       <div className="flex justify-center items-center h-full">
@@ -15,6 +28,15 @@ export const Nav: React.FC = () => {
             Home
           </div>
         </Link>
+
+        <button onClick={toggleSettingsDrawer}>
+          <div className="rounded hover:bg-blue-300 px-4 py-2">
+            <span className="pr-2">
+              <FontAwesomeIcon className="text-xl" icon={faCog} />
+            </span>
+            Settings
+          </div>
+        </button>
       </div>
     );
   }

@@ -5,7 +5,10 @@ import produce from 'immer';
 export const initialState: State = {
   STORE_VERSION: STORE_VERSION,
   savedLocations: [],
-  savedForecasts: {}
+  savedForecasts: {},
+  notSaved: {
+    settingsDrawerOpen: false
+  }
 };
 
 export const rootReducer = (state: State, action: StateAction): State => {
@@ -28,6 +31,16 @@ export const rootReducer = (state: State, action: StateAction): State => {
         const { locationId, savedForecastInfo } = action.payload;
         draft.savedForecasts[locationId] = savedForecastInfo;
       });
+    case 'OPEN_SETTINGS_DRAWER':
+      return {
+        ...state,
+        notSaved: { ...state.notSaved, settingsDrawerOpen: true }
+      };
+    case 'CLOSE_SETTINGS_DRAWER':
+      return {
+        ...state,
+        notSaved: { ...state.notSaved, settingsDrawerOpen: false }
+      };
     default:
       return state;
   }

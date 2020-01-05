@@ -18,6 +18,7 @@ export function useProviderValue() {
 
   useEffect(() => {
     if (STORE_VERSION === state.STORE_VERSION) {
+      delete state.notSaved;
       localStorage.setItem('state', JSON.stringify(state));
     }
   }, [state]);

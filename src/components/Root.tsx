@@ -4,12 +4,13 @@ import { WeatherCards } from './WeatherCards';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AddLocation } from './AddLocation';
 import { Forecast } from './Forecast';
+import { SettingsDrawer } from './SettingsDrawer';
 
 export const Root: React.FC = () => {
   return (
     <Router>
       <div
-        className="h-full w-full"
+        className="h-full w-full relative"
         style={{ display: 'grid', gridTemplateRows: 'auto 60px' }}
       >
         <main className="overflow-auto bg-gray-100">
@@ -30,7 +31,7 @@ export const Root: React.FC = () => {
           </div>
         </main>
         <div
-          className="bg-blue-200 z-0"
+          className="bg-blue-200 z-50"
           style={{
             gridRow: 2,
             boxShadow:
@@ -39,6 +40,8 @@ export const Root: React.FC = () => {
         >
           <Nav />
         </div>
+
+        <SettingsDrawer />
       </div>
     </Router>
   );

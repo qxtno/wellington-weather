@@ -5,6 +5,9 @@ export interface State {
   STORE_VERSION: number;
   savedLocations: SavedLocation[];
   savedForecasts: SavedForecastInfoIndex;
+  notSaved: {
+    settingsDrawerOpen: boolean;
+  };
 }
 
 export interface SavedForecastInfoIndex {
@@ -45,8 +48,9 @@ export type StateAction =
   | {
       type: 'SET_FORECAST_INFO';
       payload: { locationId: number; savedForecastInfo: SavedForecastInfo };
-    };
-
+    }
+  | { type: 'OPEN_SETTINGS_DRAWER' }
+  | { type: 'CLOSE_SETTINGS_DRAWER' };
 export interface AddLocationActionPayload {
   savedLocation: SavedLocation;
 }

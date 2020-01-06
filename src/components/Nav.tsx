@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCog } from '@fortawesome/free-solid-svg-icons';
 import { useAppState, useDispatch } from '../store/store';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 export const Nav: React.FC = () => {
   const { notSaved, darkTheme } = useAppState();
   const settingsDrawerOpen = notSaved?.settingsDrawerOpen;
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t } =  useTranslation();
 
   function toggleSettingsDrawer() {
     if (settingsDrawerOpen) {
@@ -39,6 +41,7 @@ export const Nav: React.FC = () => {
               <FontAwesomeIcon className="text-xl" icon={faHome} />
             </span>
             Home
+            {t('hello')}
           </div>
         </button>
 

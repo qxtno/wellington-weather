@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './tailwind.g.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './translations/translation';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -3,6 +3,7 @@ import { useReducer, useEffect } from 'react';
 import { rootReducer, initialState } from '../store/rootReducer';
 import { STORE_VERSION } from '../store/store';
 import { produce } from 'immer';
+import i18next from 'i18next';
 
 export function useProviderValue() {
   const localStateString = localStorage.getItem('state');
@@ -11,6 +12,7 @@ export function useProviderValue() {
     : null;
   const providerValue = useReducer(rootReducer, localState ?? initialState);
   const [state] = providerValue;
+  i18next.changeLanguage(state.language);
 
   if (STORE_VERSION !== state.STORE_VERSION) {
     localStorage.removeItem('state');

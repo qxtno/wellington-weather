@@ -6,6 +6,7 @@ export interface State {
   savedLocations: SavedLocation[];
   savedForecasts: SavedForecastInfoIndex;
   darkTheme: boolean;
+  language: 'pl'|'en';
   notSaved: {
     settingsDrawerOpen: boolean;
   };

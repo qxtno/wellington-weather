@@ -7,6 +7,7 @@ export const initialState: State = {
   savedLocations: [],
   savedForecasts: {},
   darkTheme: false,
+  language: 'en',
   notSaved: {
     settingsDrawerOpen: false
   }

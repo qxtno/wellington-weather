@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useDispatch, useAppState } from '../store/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export const AddLocation: React.FC = () => {
   const {
@@ -17,6 +18,7 @@ export const AddLocation: React.FC = () => {
 
   const dispatch = useDispatch();
   const { savedLocations, darkTheme } = useAppState();
+  const { t } =  useTranslation();
 
   const inputClassList = classNames(
     'border flex-1 px-2 rounded min-w-0',
@@ -59,7 +61,7 @@ export const AddLocation: React.FC = () => {
               <FontAwesomeIcon icon={faSpinner} spin />
             </span>
           )}
-          Search
+          {t('search')}
         </button>
       </div>
     );

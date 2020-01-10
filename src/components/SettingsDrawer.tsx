@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsDrawer: React.FC = () => {
   const { notSaved, savedLocations, darkTheme } = useAppState();
@@ -12,6 +13,7 @@ export const SettingsDrawer: React.FC = () => {
   const dispatch = useDispatch();
   const y_state = settingsDrawerOpen ? 0 : '100%';
   const history = useHistory();
+  const { t } =  useTranslation();
 
   function closeSettingsDrawer() {
     dispatch({ type: 'CLOSE_SETTINGS_DRAWER' });
@@ -44,7 +46,7 @@ export const SettingsDrawer: React.FC = () => {
             className={drawerBtnClassList}
           >
             <div className="flex justify-center items-center">
-              Dark mode:
+              {t('dark mode')}
               {darkTheme ? (
                 <>
                   <div className="pl-1 pr-2">on</div>
@@ -76,7 +78,7 @@ export const SettingsDrawer: React.FC = () => {
               }}
               className={drawerBtnClassList}
             >
-              Delete saved location
+              {t('delete saved location')}
             </button>
           )}
         </div>

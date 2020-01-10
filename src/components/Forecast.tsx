@@ -4,10 +4,12 @@ import { useForecastState } from '../hooks/useForecastState';
 import classNames from 'classnames';
 import { getIconUrl, formatToCelsius } from '../utils';
 import { useAppState } from '../store/store';
+import { useTranslation } from 'react-i18next';
 
 export const Forecast: React.FC = () => {
   const { error, forecastInfos, savedLocation } = useForecastState();
   const { darkTheme } = useAppState();
+  const { t } =  useTranslation();
 
   const forecastHeaderClassList = classNames(
     'flex justify-center pb-2 text-2xl',
@@ -26,7 +28,7 @@ export const Forecast: React.FC = () => {
         {savedLocation && <WeatherCard savedLocation={savedLocation} />}
       </div>
       <div>
-        <p className={forecastHeaderClassList}>Forecast:</p>
+        <p className={forecastHeaderClassList}>{t('forecast')}</p>
         <div className="flex overflow-auto">
           {forecastInfos?.map((forecastInfo, index) => {
             const itemClassList = classNames({ 'pl-2': index !== 0 });
@@ -56,8 +58,8 @@ export const Forecast: React.FC = () => {
                     {formatToCelsius(forecastInfo?.temp)} {forecastInfo?.sky}
                   </p>
                   <p className="pt-2 whitespace-no-wrap">
-                    min temp: {formatToCelsius(forecastInfo?.temp_min)} | max
-                    temp: {formatToCelsius(forecastInfo?.temp_max)}
+                    {t('min temp')} {formatToCelsius(forecastInfo?.temp_min)} | {t('max temp')}
+                    {formatToCelsius(forecastInfo?.temp_max)}
                   </p>
                 </div>
               </div>

@@ -1,4 +1,10 @@
 {
-    "hello": "cześć",
-    "search": "Szukaj"
+    "home": "Strona Główna",
+    "search": "Szukaj",
+    "settings": "Ustawienia",
+    "forecast": "Prognoza:",
+    "min temp": "min temp:",
+    "max temp": "max temp ",
+    "dark mode": "Tryb ciemny:",
+    "delete saved location": "Usuń zapisane lokalizacje"
 }

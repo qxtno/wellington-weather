@@ -7,6 +7,7 @@ import { useWeatherCardState } from '../hooks/useWeatherCardState';
 import { getIconUrl, formatToCelsius } from '../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 const CardContainer: React.FC<CardContainerProps> = ({
   children,
@@ -45,6 +46,7 @@ const WeatherCardContent: React.FC<WeatherCardProps & {
 }> = ({ savedLocation, navigateTo }) => {
   const { weatherInfo } = useWeatherCardState(savedLocation);
   const { darkTheme } = useAppState();
+  const { t } =  useTranslation();
 
   function cardContent() {
     return (
@@ -60,7 +62,7 @@ const WeatherCardContent: React.FC<WeatherCardProps & {
           {formatToCelsius(weatherInfo?.temp)} {weatherInfo?.sky}
         </p>
         <p className="pt-2">
-          min temp: {formatToCelsius(weatherInfo?.temp_min)} | max temp:{' '}
+          {t('min temp')} {formatToCelsius(weatherInfo?.temp_min)} | {t('max temp')} {' '}
           {formatToCelsius(weatherInfo?.temp_max)}
         </p>
       </div>

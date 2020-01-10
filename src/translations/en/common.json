@@ -1,4 +1,11 @@
 {
-    "hello": "hello",
-    "search": "Search"
+    "home": "Home",
+    "search": "Search",
+    "settings": "Settings",
+    "forecast": "Forecast:",
+    "min temp": "min temp:",
+    "max temp": "max temp: ",
+    "dark mode": "Dark mode:",
+    "delete saved location": "Delete saved location"
+    
 }

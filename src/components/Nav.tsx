@@ -40,8 +40,7 @@ export const Nav: React.FC = () => {
             <span className="pr-2">
               <FontAwesomeIcon className="text-xl" icon={faHome} />
             </span>
-            Home
-            {t('hello')}
+            {t('home')}
           </div>
         </button>
 
@@ -50,7 +49,7 @@ export const Nav: React.FC = () => {
             <span className="pr-2">
               <FontAwesomeIcon className="text-xl" icon={faCog} />
             </span>
-            Settings
+            {t('settings')}
           </div>
         </button>
       </div>
